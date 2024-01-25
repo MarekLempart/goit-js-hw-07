@@ -33,12 +33,32 @@ galleryList.addEventListener("click", (event) => {
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  const instance = basicLightbox.instance();
-  if (event.key === "Escape" && instance.visible()) {
-    instance.close();
+const instance = basicLightbox.create(
+  `
+    <div class="modal">
+        <p>A custom modal that has been styled independently. It's not part of basicLightbox, but perfectly shows its flexibility.</p>
+        <input placeholder="Type something">
+        <a>Close</a>
+    </div>
+`,
+  {
+    onShow: (instance) => {
+      instance.element().querySelector("a").onclick = instance.close;
+    },
   }
-});
+);
+
+function onEscape(event) {
+  if (event.code !== "Escape") return;
+  instance.close();
+}
+
+// document.addEventListener("keydown", (event) => {
+//   const instance = basicLightbox.instance();
+//   if (event.key === "Escape" && instance.visible()) {
+//     instance.close();
+//   }
+// });
 
 // Change code below this line
 console.log(galleryItems);
