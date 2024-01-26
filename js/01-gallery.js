@@ -26,42 +26,39 @@ galleryList.append(...galleryElements);
 galleryList.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.nodeName === "IMG") {
-    const instance = basicLightbox.create(`
+    const instance = basicLightbox.create(
+      `
       <img src="${event.target.dataset.source}" alt="${event.target.alt}" width="800" height="600">
-    `);
+    `,
+      {
+        onShow: (instance) => {
+          document.addEventListener("keydown", onEscape);
+        },
+        onClose: (instance) => {
+          document.removeEventListener("keydown", onEscape);
+        },
+      }
+    );
     instance.show();
   }
 });
 
-const instance = basicLightbox.create(
-  `
-    <div class="modal">
-        <p>A custom modal that has been styled independently. It's not part of basicLightbox, but perfectly shows its flexibility.</p>
-        <input placeholder="Type something">
-        <a>Close</a>
-    </div>
-`,
-  {
-    onShow: (instance) => {
-      instance.element().querySelector("a").onclick = instance.close;
-    },
-  }
-);
-
 function onEscape(event) {
-  if (event.code !== "Escape") return;
-  instance.close();
+  if (event.key === "Escape") {
+    const instance = basicLightbox.instance();
+    instance.close();
+  }
 }
 
-// document.addEventListener("keydown", (event) => {
-//   const instance = basicLightbox.instance();
-//   if (event.key === "Escape" && instance.visible()) {
-//     instance.close();
-//   }
-// });
-
-// Change code below this line
 console.log(galleryItems);
+
+// function onEscape(event) {
+//   if (event.code !== "Escape") return;
+//   instance.close();
+// }
+
+// // Change code below this line
+// console.log(galleryItems);
 
 // import { galleryItems } from "./gallery-items.js";
 // // Change code below this line
