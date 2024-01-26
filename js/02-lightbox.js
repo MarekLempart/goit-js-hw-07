@@ -22,17 +22,39 @@ const galleryElements = galleryItems.map((item) => {
   return galleryListItem;
 });
 
+galleryList.append(...galleryElements);
+
 var images = document.querySelectorAll(".gallery img");
 images.forEach(function (image) {
   image.addEventListener("click", function (event) {
     event.preventDefault();
     const lightbox = new SimpleLightbox(".gallery a", {
-      /* options */
+      captionsData: "alt",
+      captionDelay: 250,
     });
   });
 });
 
-// var lightbox = new SimpleLightbox(".gallery a", {});
-// galleryList.append(...galleryElements);
-
 console.log(galleryItems);
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const lightbox = new SimpleLightbox(".gallery a", {
+//     captionsData: "alt",
+//     captionDelay: 250,
+//   });
+
+//   lightbox.on("show.simplelightbox", () => {
+//     document.addEventListener("keydown", onEscape);
+//   });
+
+//   lightbox.on("close.simplelightbox", () => {
+//     document.removeEventListener("keydown", onEscape);
+//   });
+// });
+
+// function onEscape(event) {
+//   if (event.key === "Escape") {
+//     const lightbox = SimpleLightbox.getInstance();
+//     lightbox.close();
+//   }
+// }

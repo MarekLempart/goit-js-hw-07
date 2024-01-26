@@ -23,10 +23,12 @@ const galleryElements = galleryItems.map((item) => {
 
 galleryList.append(...galleryElements);
 
+let lightboxInstance;
+
 galleryList.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.nodeName === "IMG") {
-    const instance = basicLightbox.create(
+    lightboxInstance = basicLightbox.create(
       `
       <img src="${event.target.dataset.source}" alt="${event.target.alt}" width="800" height="600">
     `,
@@ -39,26 +41,17 @@ galleryList.addEventListener("click", (event) => {
         },
       }
     );
-    instance.show();
+    lightboxInstance.show();
   }
 });
 
 function onEscape(event) {
-  if (event.key === "Escape") {
-    const instance = basicLightbox.instance();
-    instance.close();
+  if (event.key === "Escape" && lightboxInstance) {
+    lightboxInstance.close();
   }
 }
 
 console.log(galleryItems);
-
-// function onEscape(event) {
-//   if (event.code !== "Escape") return;
-//   instance.close();
-// }
-
-// // Change code below this line
-// console.log(galleryItems);
 
 // import { galleryItems } from "./gallery-items.js";
 // // Change code below this line
