@@ -24,14 +24,18 @@ const galleryElements = galleryItems.map((item) => {
 
 galleryList.append(...galleryElements);
 
+// ----- ponieważ biblioteka SimpleLightbox posiada w sobie m.in. pętle forEach -----
 // var images = document.querySelectorAll(".gallery img");
 // images.forEach(function (image) {
 //   image.addEventListener("click", function (event) {
 //     event.preventDefault();
+// ----- powyższa cześć kodu nie powinna być uruchamiana -----
+
 const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
 });
+
 //   });
 // });
 
