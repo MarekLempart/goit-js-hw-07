@@ -51,6 +51,11 @@ function onEscape(event) {
   }
 }
 
+// function onEscape(event) {
+//   if (event.code !== "Escape") return;
+//   lightboxInstance.close();
+// }
+
 console.log(galleryItems);
 
 // import { galleryItems } from "./gallery-items.js";
